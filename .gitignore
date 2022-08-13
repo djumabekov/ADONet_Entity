@@ -3,10 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-Exam_01_Jumabekov_Darkhan
-Exam_02_Jumabekov_Darkhan
-Exam_03_Jumabekov_Darkhan
-
+Exam_01_Jumabekov_Darkhan/
+Exam_02_Jumabekov_Darkhan/
+Exam_03_Jumabekov_Darkhan/
+temp/
 # User-specific files
 *.rsuser
 *.suo
