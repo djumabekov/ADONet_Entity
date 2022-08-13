@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище SpainFootballChampionshipModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clubs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Club" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdCities" Type="int" Nullable="false" />
+          <Property Name="IdStadiums" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFirstClub" Type="int" Nullable="false" />
+          <Property Name="IdSecondClub" Type="int" Nullable="false" />
+          <Property Name="FirstClubGoals" Type="int" Nullable="false" />
+          <Property Name="SecondClubGoals" Type="int" Nullable="false" />
+          <Property Name="PlayersWhoGoals" Type="varchar" MaxLength="100" />
+          <Property Name="GameDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Players">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdClubs" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdCountries" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stadiums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stadium" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Clubs__IdCities__3C69FB99">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clubs">
+              <PropertyRef Name="IdCities" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clubs__IdStadium__3D5E1FD2">
+          <End Role="Stadiums" Type="Self.Stadiums" Multiplicity="1" />
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stadiums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clubs">
+              <PropertyRef Name="IdStadiums" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Games__IdFirstCl__440B1D61">
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="IdFirstClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Games__IdSecondC__44FF419A">
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="IdSecondClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Players__IdClubs__403A8C7D">
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="1" />
+          <End Role="Players" Type="Self.Players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Players">
+              <PropertyRef Name="IdClubs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Players__IdCount__412EB0B6">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Players" Type="Self.Players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Players">
+              <PropertyRef Name="IdCountries" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SpainFootballChampionshipModelContainer">
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clubs" EntityType="Self.Clubs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stadiums" EntityType="Self.Stadiums" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Clubs__IdCities__3C69FB99" Association="Self.FK__Clubs__IdCities__3C69FB99">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Clubs" EntitySet="Clubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clubs__IdStadium__3D5E1FD2" Association="Self.FK__Clubs__IdStadium__3D5E1FD2">
+            <End Role="Stadiums" EntitySet="Stadiums" />
+            <End Role="Clubs" EntitySet="Clubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Games__IdFirstCl__440B1D61" Association="Self.FK__Games__IdFirstCl__440B1D61">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Games__IdSecondC__44FF419A" Association="Self.FK__Games__IdSecondC__44FF419A">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Players__IdClubs__403A8C7D" Association="Self.FK__Players__IdClubs__403A8C7D">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Players" EntitySet="Players" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Players__IdCount__412EB0B6" Association="Self.FK__Players__IdCount__412EB0B6">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Players" EntitySet="Players" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpainFootballChampionshipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clubs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Club" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK__Games__IdFirstCl__3E52440B" FromRole="Clubs" ToRole="Games" />
+          <NavigationProperty Name="Games1" Relationship="Self.FK__Games__IdSecondC__3F466844" FromRole="Clubs" ToRole="Games" />
+          <NavigationProperty Name="Players" Relationship="Self.FK__Players__IdClubs__3A81B327" FromRole="Clubs" ToRole="Players" />
+          <Property Name="IdCities" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="SpainFootballChampionshipModel.FK__Clubs__IdCities__3A81B327" FromRole="Clubs" ToRole="Cities" />
+          <Property Name="IdStadiums" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Stadiums" Relationship="SpainFootballChampionshipModel.FK__Clubs__IdStadium__3D5E1FD2" FromRole="Clubs" ToRole="Stadiums" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Players" Relationship="Self.FK__Players__IdCount__3B75D760" FromRole="Countries" ToRole="Players" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFirstClub" Type="Int32" Nullable="false" />
+          <Property Name="IdSecondClub" Type="Int32" Nullable="false" />
+          <Property Name="FirstClubGoals" Type="Int32" Nullable="false" />
+          <Property Name="SecondClubGoals" Type="Int32" Nullable="false" />
+          <Property Name="PlayersWhoGoals" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GameDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Clubs" Relationship="Self.FK__Games__IdFirstCl__3E52440B" FromRole="Games" ToRole="Clubs" />
+          <NavigationProperty Name="Clubs1" Relationship="Self.FK__Games__IdSecondC__3F466844" FromRole="Games" ToRole="Clubs" />
+        </EntityType>
+        <EntityType Name="Players">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdClubs" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCountries" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clubs" Relationship="Self.FK__Players__IdClubs__3A81B327" FromRole="Players" ToRole="Clubs" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK__Players__IdCount__3B75D760" FromRole="Players" ToRole="Countries" />
+        </EntityType>
+        <Association Name="FK__Games__IdFirstCl__3E52440B">
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="IdFirstClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Games__IdSecondC__3F466844">
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="IdSecondClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Players__IdClubs__3A81B327">
+          <End Role="Clubs" Type="Self.Clubs" Multiplicity="1" />
+          <End Role="Players" Type="Self.Players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Players">
+              <PropertyRef Name="IdClubs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Players__IdCount__3B75D760">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Players" Type="Self.Players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Players">
+              <PropertyRef Name="IdCountries" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpainFootballChampionshipEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clubs" EntityType="Self.Clubs" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="Games" EntityType="Self.Games" />
+          <EntitySet Name="Players" EntityType="Self.Players" />
+          <AssociationSet Name="FK__Games__IdFirstCl__3E52440B" Association="Self.FK__Games__IdFirstCl__3E52440B">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Games__IdSecondC__3F466844" Association="Self.FK__Games__IdSecondC__3F466844">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Players__IdClubs__3A81B327" Association="Self.FK__Players__IdClubs__3A81B327">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Players" EntitySet="Players" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Players__IdCount__3B75D760" Association="Self.FK__Players__IdCount__3B75D760">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Players" EntitySet="Players" />
+          </AssociationSet>
+          <EntitySet Name="Cities" EntityType="SpainFootballChampionshipModel.Cities" />
+          <AssociationSet Name="FK__Clubs__IdCities__3A81B327" Association="SpainFootballChampionshipModel.FK__Clubs__IdCities__3A81B327">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Clubs" EntitySet="Clubs" />
+          </AssociationSet>
+          <EntitySet Name="Stadiums" EntityType="SpainFootballChampionshipModel.Stadiums" />
+          <AssociationSet Name="FK__Clubs__IdStadium__3D5E1FD2" Association="SpainFootballChampionshipModel.FK__Clubs__IdStadium__3D5E1FD2">
+            <End Role="Stadiums" EntitySet="Stadiums" />
+            <End Role="Clubs" EntitySet="Clubs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clubs" Relationship="SpainFootballChampionshipModel.FK__Clubs__IdCities__3A81B327" FromRole="Cities" ToRole="Clubs" />
+        </EntityType>
+        <Association Name="FK__Clubs__IdCities__3A81B327">
+          <End Type="SpainFootballChampionshipModel.Cities" Role="Cities" Multiplicity="1" />
+          <End Type="SpainFootballChampionshipModel.Clubs" Role="Clubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clubs">
+              <PropertyRef Name="IdCities" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Stadiums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stadium" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clubs" Relationship="SpainFootballChampionshipModel.FK__Clubs__IdStadium__3D5E1FD2" FromRole="Stadiums" ToRole="Clubs" />
+        </EntityType>
+        <Association Name="FK__Clubs__IdStadium__3D5E1FD2">
+          <End Type="SpainFootballChampionshipModel.Stadiums" Role="Stadiums" Multiplicity="1" />
+          <End Type="SpainFootballChampionshipModel.Clubs" Role="Clubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stadiums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clubs">
+              <PropertyRef Name="IdStadiums" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SpainFootballChampionshipModelContainer" CdmEntityContainer="SpainFootballChampionshipEntities">
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="SpainFootballChampionshipModel.Clubs">
+              <MappingFragment StoreEntitySet="Clubs">
+                <ScalarProperty Name="IdStadiums" ColumnName="IdStadiums" />
+                <ScalarProperty Name="IdCities" ColumnName="IdCities" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Club" ColumnName="Club" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="SpainFootballChampionshipModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="SpainFootballChampionshipModel.Games">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFirstClub" ColumnName="IdFirstClub" />
+                <ScalarProperty Name="IdSecondClub" ColumnName="IdSecondClub" />
+                <ScalarProperty Name="FirstClubGoals" ColumnName="FirstClubGoals" />
+                <ScalarProperty Name="SecondClubGoals" ColumnName="SecondClubGoals" />
+                <ScalarProperty Name="PlayersWhoGoals" ColumnName="PlayersWhoGoals" />
+                <ScalarProperty Name="GameDate" ColumnName="GameDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="SpainFootballChampionshipModel.Players">
+              <MappingFragment StoreEntitySet="Players">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdClubs" ColumnName="IdClubs" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="IdCountries" ColumnName="IdCountries" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="SpainFootballChampionshipModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stadiums">
+            <EntityTypeMapping TypeName="SpainFootballChampionshipModel.Stadiums">
+              <MappingFragment StoreEntitySet="Stadiums">
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Stadium" ColumnName="Stadium" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

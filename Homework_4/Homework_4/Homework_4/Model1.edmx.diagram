@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1749e1976ead40f4b271880f23ce1795" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="SpainFootballChampionshipModel.Clubs" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpainFootballChampionshipModel.Countries" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpainFootballChampionshipModel.Games" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpainFootballChampionshipModel.Players" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="SpainFootballChampionshipModel.FK__Games__IdFirstCl__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="SpainFootballChampionshipModel.FK__Games__IdSecondC__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="SpainFootballChampionshipModel.FK__Players__IdClubs__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="SpainFootballChampionshipModel.FK__Players__IdCount__3B75D760" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SpainFootballChampionshipModel.Cities" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="SpainFootballChampionshipModel.FK__Clubs__IdCities__3A81B327" />
+        <EntityTypeShape EntityType="SpainFootballChampionshipModel.Stadiums" Width="1.5" PointX="3.375" PointY="6.875" />
+        <AssociationConnector Association="SpainFootballChampionshipModel.FK__Clubs__IdStadium__3D5E1FD2" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
